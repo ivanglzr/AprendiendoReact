@@ -1,14 +1,23 @@
 /* eslint-disable react/prop-types */
 
 import "../css/Products.css";
+import useCart from "../hooks/useCart";
 
-import { AddToCartIcon } from "./Icons";
+import { AddToCartIcon, RemoveFromCartIcon } from "./Icons";
 
 export default function Products({ products }) {
+  const { cart, addToCart } = useCart();
+
+  const checkProductInCart = (product) => {
+    return cart.some((item) => item.id === product.id);
+  };
+
   return (
     <main className="products">
       <ul>
         {products.slice(0, 10).map((product) => {
+          const isProductInCart = checkProductInCart(product);
+
           return (
             <li key={product.id}>
               <img src={product.thumbnail} alt={product.title} />
@@ -16,8 +25,8 @@ export default function Products({ products }) {
                 <strong>{product.title}</strong> - ${product.price}
               </div>
               <div>
-                <button>
-                  <AddToCartIcon />
+                <button onClick={() => addToCart(product)}>
+                  {isProductInCart ? <RemoveFromCartIcon /> : <AddToCartIcon />}
                 </button>
               </div>
             </li>
