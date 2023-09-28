@@ -20,6 +20,10 @@
   background: #111;
   color: #fff;
   padding: 1rem;
+
+  & div button:focus {
+    outline: none;
+  }
 }
 
 .products h3 {

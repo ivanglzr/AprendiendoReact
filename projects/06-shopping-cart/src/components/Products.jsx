@@ -6,7 +6,7 @@ import useCart from "../hooks/useCart";
 import { AddToCartIcon, RemoveFromCartIcon } from "./Icons";
 
 export default function Products({ products }) {
-  const { cart, addToCart } = useCart();
+  const { cart, addToCart, removeFromCart } = useCart();
 
   const checkProductInCart = (product) => {
     return cart.some((item) => item.id === product.id);
@@ -25,7 +25,14 @@ export default function Products({ products }) {
                 <strong>{product.title}</strong> - ${product.price}
               </div>
               <div>
-                <button onClick={() => addToCart(product)}>
+                <button
+                  style={{ backgroundColor: isProductInCart ? "red" : "#09f" }}
+                  onClick={() =>
+                    isProductInCart
+                      ? removeFromCart(product)
+                      : addToCart(product)
+                  }
+                >
                   {isProductInCart ? <RemoveFromCartIcon /> : <AddToCartIcon />}
                 </button>
               </div>

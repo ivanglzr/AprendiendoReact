@@ -12,5 +12,6 @@ export default function useCart() {
     cart: context.cart,
     addToCart: context.addToCart,
     clearCart: context.clearCart,
+    removeFromCart: context.removeFromCart,
   };
 }
